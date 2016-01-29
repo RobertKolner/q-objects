@@ -30,7 +30,7 @@ class QTest(TestCase):
         group_pks = inserted_pks.get(Group)
 
         memberships = [
-            (0, [0, 1, 2]),
+            (0, [0, 1]),
         ]
 
         for user_id, group_ids in memberships:
@@ -40,7 +40,7 @@ class QTest(TestCase):
                 User.groups.through(user_id=user_pk, group_id=group_pk).save()
 
     def test_setup(self):
-        query_simple = q(0) & q(1) & q(2)
-        query_neg = ~(~q(0) | ~q(1) | ~q(2))
+        query_simple = q(0) & q(1)
+        query_neg = ~(~q(0) | ~q(1))
 
         self.assertEqual(count(query_simple), count(query_neg))
